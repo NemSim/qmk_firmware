@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    Ortholinear Keyboards
 #define PRODUCT         The Preonic Keyboard
-#define DESCRIPTION     A compact ortholinear keyboard
+#define DESCRIPTION     special @nemsim edition
 
 /* key matrix size */
 #define MATRIX_ROWS 5
