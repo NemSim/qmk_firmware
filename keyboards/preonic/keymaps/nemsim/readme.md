@@ -4,4 +4,4 @@
 
 # Build
 
-`make preonic/rev2:nemsim:dfu`
+`make preonic/rev1:nemsim:dfu`
