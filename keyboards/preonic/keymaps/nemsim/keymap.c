@@ -137,6 +137,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
+#ifdef AUDIO_ENABLE
+// Beethoven's 5th-ish
+float tone_startup[][2] = {
+  {NOTE_E4, 20},
+  {NOTE_E4, 20},
+  {NOTE_E4, 20},
+  {NOTE_C4, 40}
+};
+
+float tone_goodbye[][2]    = SONG(GOODBYE_SOUND);
+
+float music_scale[][2]     = SONG(MUSIC_SCALE_SOUND);
+#endif
+
+
 void persistant_default_layer_set(uint16_t default_layer) {
   eeconfig_update_default_layer(default_layer);
   default_layer_set(default_layer);
@@ -178,3 +193,37 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     return true;
 };
+
+void matrix_init_user(void) {
+    #ifdef AUDIO_ENABLE
+        startup_user();
+    #endif
+}
+
+#ifdef AUDIO_ENABLE
+
+void startup_user()
+{
+    _delay_ms(20); // gets rid of tick
+    // play startup tone
+    /* PLAY_NOTE_ARRAY(tone_startup, false, 0.25); */
+}
+
+void shutdown_user()
+{
+    //PLAY_NOTE_ARRAY(tone_goodbye, false, 0.25);
+    _delay_ms(150);
+    stop_all_notes();
+}
+
+void music_on_user(void)
+{
+    music_scale_user();
+}
+
+void music_scale_user(void)
+{
+    PLAY_NOTE_ARRAY(music_scale, false, 0.25);
+}
+
+#endif
